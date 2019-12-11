@@ -1,0 +1,19 @@
+@import './variables';
+@import './mixins';
+
+@import './global_styles.scss';
+@import './grid.scss';
+
+
+p {
+    padding: 20px;
+    color: white;
+    background: #9b59b6;
+    margin: 20px;
+  }
+
+  .img-resize {
+      resize: both;
+      max-width: 100%;
+      height: auto;
+  }

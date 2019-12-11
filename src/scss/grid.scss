@@ -27,19 +27,18 @@ $gridSettings : (
     $marginInPercent: map-get($settings,'marginInt') / $maxWidth * 100 * 2;
 
     @while $i <= map-get($settings, "columns") {
-        $mediaKey : $key;
+        $mediaKey : $key+'-';
         @if $key == 'base' {
             $mediaKey: '';
         } 
 
-        .col-#{$mediaKey}-#{$i} {
+        .col-#{$mediaKey}#{$i} {
             float: left;
-            // margin-right: map-get($settings,'margin');
-            // margin-left: map-get($settings,'margin');
             position: relative;
             padding-right: 15px;
             padding-left: 15px;
-            width: 100% * $i / map-get($settings,"columns") - $marginInPercent;
+            // width: 100% * $i / map-get($settings,"columns") - $marginInPercent;
+            width: 100% * $i / map-get($settings,"columns");
             &:after{
                 display:table;
                 clear:both;

@@ -1,7 +1,7 @@
 <template >
   <div class='container'>
     <ThumbsPerPageSlider
-      v-on:update-thumbs-per-page="itemsPerPage = $event"
+      v-on:[updateThumbsPerPage]="itemsPerPage = $event"
       :itemsPerPage="itemsPerPage"
     />
     <div id='pagination' class='row'>
@@ -21,6 +21,12 @@
 </template>
 
 <script>
+/**
+ * @typedef import('./controlPanelEvents.js').controlPanelEvents
+ */
+
+/** @type controlPanelEvents */
+import controlPanelEvents from './control_panel/controlPanelEvents.js';
 import MainPageImgThumb from "./MainPageImgThumb.vue";
 import ThumbsPerPageSlider from './control_panel/ThumbsPerPageSlider.vue';
 /* TODO to redo number of pages with a slider  */
@@ -33,6 +39,7 @@ export default {
       currentPage: 1,
       prevPageDisabled: false,
       nextPageDisabled: false,
+      updateThumbsPerPage: controlPanelEvents.updateThumbsPerPage,
       //itemsPerPage: 30
     };
   },

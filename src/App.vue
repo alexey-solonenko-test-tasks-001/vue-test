@@ -1,20 +1,20 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
+  <div id="app" class='container'>
+    <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-    <ImagesListMain />
+    <ImageGalleryPage />
   </div>
 </template>
 
 <script>
 // import HelloWorld from "./components/HelloWorld.vue";
-import ImagesListMain from './components/ImagesListMain.vue';
+import ImageGalleryPage from './pages/img_gallery/ImageGalleryPage.vue';
 
 export default {
   name: "app",
   components: {
-    // HelloWorld,
-    ImagesListMain
+    ImageGalleryPage
   }
 };
 

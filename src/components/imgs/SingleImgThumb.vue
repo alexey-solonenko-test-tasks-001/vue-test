@@ -1,16 +1,31 @@
 <template >
-<div class='col-sm-12 col-md-4 col-lg-3' >
-    <a target="_blank" v-bind:href="img.url" >
+<div class='col-sm-12 col-md-4 col-lg-3 ' v-bind:class="filterByAuthor">
+    <!-- <a target="_blank" v-bind:href="img.url" > -->
     <img 
         class='img-resize'
     v-bind:src="formattedImage.download_url" 
-    /> </a>
+        @click="$emit(openModal,img)"
+    />
+     <!-- </a> -->
     <div >{{ img.author }}</div>
 </div>
 </template>
 
 <script>
+/**
+ * @typedef import('../control_panel/controlPanelEvents.js').controlPanelEvents
+ */
+
+/** @type controlPanelEvents */
+import controlPanelEvents from "../control_panel/controlPanelEvents";
+
 export default {
+    data: function(){
+        return ({
+            openModal: controlPanelEvents.openModal,
+            closeModal: controlPanelEvents.closeModal,
+        });
+    },
     computed: {
         formattedImage: function(){
             /* Last to url parts are resolution, we need to change them */
@@ -22,13 +37,24 @@ export default {
             img.download_url = url;
 
             return img;
+        },
+        filterByAuthor : function(){
+            if(!this.searchKeyword) return '';
+            if(this.img.author.toString().toLowerCase().search(this.searchKeyword.toLowerCase()) > -1){
+                return '';
+            } else {
+                return 'd-none';
+            }
         }
     },
     /* todo to redo into a reusable object from lib */
     props:{
         img : {
             type: Object,
-        }
+        },
+        searchKeyword : {
+            type: String
+        },
     }
 }
 </script>

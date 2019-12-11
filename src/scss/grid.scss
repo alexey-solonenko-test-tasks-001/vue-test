@@ -1,24 +1,4 @@
 
-$gridSettings : (
-    maxWidth: $full-container-width,
-    columns: $num-of-columns,
-    margin: $base-margin*1px,
-    marginInt: $base-margin,
-    breakpoints: (
-        base:"(min-width : 0px)",
-        xs: "(min-width : 0px)",
-        sm: "(min-width: 481px)",
-        md: "(min-width: 769px)",
-        lg: "(min-width : 1025px)"
-    ),
-    maxWidths:(
-        base:1200,
-        xs: 480,
-        sm: 768,
-        md: 1024,
-        lg: 1200,
-    )
-);
 
 @mixin renderSingleGrid($key, $settings) {
     $i : 1;

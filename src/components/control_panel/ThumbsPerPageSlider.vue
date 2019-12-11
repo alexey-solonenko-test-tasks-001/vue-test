@@ -7,7 +7,7 @@
                 id='thumbsPerPageInput'
                 name='thumbsPerPageInput'
                 v-on='listeners'
-                :value='itemsPerPage'
+                :value='thumbsPerPage'
                 
             >
         </div>
@@ -20,7 +20,7 @@
                 min='1'
                 max='100'
                 v-on='listeners'
-                :value='itemsPerPage'
+                :value='thumbsPerPage'
             >
         </div>
         <div class='col-xs-2'>100 to repl with prop</div>
@@ -38,7 +38,9 @@ import controlPanelEvents from './controlPanelEvents.js';
 
 export default {
     props: {
-        itemsPerPage: String,
+        thumbsPerPage: {
+            required:false
+        },
     },
     computed: {
         /**

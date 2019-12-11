@@ -1,0 +1,18 @@
+$displays :(
+    'none'
+    'flex'
+    'inline'
+    'block',
+    'inline-block'
+);
+
+.d-block {
+    display:block !important;
+}
+
+.d-none {
+    display:none !important;
+}
+.d-flex {
+    display: flex !important;
+}

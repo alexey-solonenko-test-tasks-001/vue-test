@@ -12,7 +12,7 @@
 
 <script>
 /**
- * @typedef import('../../components/control_panel/controlPanelEvents.js').controlPanelEvents
+ * @typedef import('./controlPanelEvents.js').controlPanelEvents
  */
 
 /** @type controlPanelEvents */

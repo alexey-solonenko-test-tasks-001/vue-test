@@ -1,32 +1,26 @@
 <template>
   <div class="modal" v-bind:class="(show ? 'd-block' : 'd-none')">
     <div class="modal-content container">
-      <div class="modal-header row">
-        <div class="col-12">
-          <button @click="$emit(closeModal)" class="close">X</button>
-        </div>
-      </div>
       <div class="modal-body">
         <div class="row" v-bind:class="(contentEmpty ? 'd-none' : 'd-flex')">
           <div class="col-12">
             <img src class="img-resize" id="modal-img" />
           </div>
-          <div class="col-12">
+          <div class="col-6 col-md-3">
             <p>Author: {{ img.author }}</p>
           </div>
-          <div class="col-6">
-              <a v-bind:href="img.url" target="_blank">
-              <p>Explore this image</p>
-              </a>
+          <div class="col-6 col-md-3 text-center">
+             <a target='_blank' v-bind:href="img.url">Explore #{{ img.id }}</a>
           </div>
-          <!-- <div class="col-6">
-            <button @click="downloadImg">
-              <p>Download</p>
-            </button>
-          </div> -->
+          <div class="col-6 col-md-3 text-center ">
+            <a target='_blank' download='img' v-bind:href="img.download_url">Download #{{ img.id }}</a>
+          </div>
+          <div class='col-6 col-md-3'>
+            <button v-on:click="$emit(closeModal)">Close</button>
+          </div>
           <div class="col-12"></div>
         </div>
-        <div class="row" v-bind:class="(contentEmpty ? 'd-block' : 'd-none')">
+        <div class="row" v-bind:class="( contentEmpty ? 'd-block' : 'd-none')">
           <div class="col-12">Loading...</div>
         </div>
       </div>
@@ -65,7 +59,6 @@ export default {
       if (!this.img || !this.img.id) {
         return;
       }
-
       if (this.show) {
         this.contentEmpty = true;
         fetch(this.img.download_url)
@@ -91,7 +84,7 @@ export default {
   methods: {
       downloadImg: function(){
           window.location = this.img.download_url;
-      }
+      },
   }
 };
 </script>

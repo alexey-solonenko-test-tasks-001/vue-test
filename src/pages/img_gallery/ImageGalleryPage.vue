@@ -117,7 +117,7 @@ export default {
       } else if (dir > 0) {
         this.currentPage++;
       }
-      this.loadImages();
+      //this.loadImages();
     },
     filterImagesByAuthor: function(keyword){
         this.searchAuthorKeyword = keyword; 

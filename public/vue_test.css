@@ -52,9 +52,17 @@ body {
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .neat-border {
   border: 2px solid #ccc;
   border-radius: 4px;
+}
+
+.text-truncate {
+  text-overflow: ellipsis;
 }
 
 .container {
@@ -897,17 +905,18 @@ body {
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 5% auto auto auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 75%;
 }
 
 /* The Close Button */
 .close {
-  color: #aaa;
+  color: white;
+  background-color: gray;
   float: right;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -933,7 +942,7 @@ label {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #47b8d4;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -955,10 +964,15 @@ button {
   left: 90%;
   z-index: 1200;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .img-resize {
   resize: both;
   max-width: 100%;
   height: auto;
+}
+
+.sepia:hover {
+  filter: sepia(75%);
 }

@@ -1,3 +1,10 @@
+
+VIDEO SLOT ASSESSMENT
+
+- dev:scss-nodemon to compile css from scss
+- most of the points from the assignment are ready. Except, pagination is simplified and does not read from API headers, and did not wire-up debouncing.
+
+
 # vs-test
 
 ## Project setup

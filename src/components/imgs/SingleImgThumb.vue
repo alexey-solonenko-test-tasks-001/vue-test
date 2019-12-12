@@ -1,13 +1,15 @@
 <template >
-<div class='col-sm-12 col-md-4 col-lg-3 ' v-bind:class="filterByAuthor">
-    <!-- <a target="_blank" v-bind:href="img.url" > -->
-    <img 
-        class='img-resize'
-    v-bind:src="formattedImage.download_url" 
-        @click="$emit(openModal,img)"
-    />
-     <!-- </a> -->
-    <div >{{ img.author }}</div>
+<div class='col-sm-12 col-md-4 col-lg-3 pb-1 ' v-bind:class="filterByAuthor">
+    <div class='neat-border'>
+        <!-- <a target="_blank" v-bind:href="img.url" > -->
+        <img 
+            class='img-resize w-100 cursor-pointer'
+        v-bind:src="formattedImage.download_url" 
+            @click="$emit(openModal,img)"
+        />
+        <!-- </a> -->
+        <div >{{ img.author }}</div>
+    </div>
 </div>
 </template>
 

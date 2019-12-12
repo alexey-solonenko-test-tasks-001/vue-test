@@ -1,6 +1,8 @@
 <template>
   <div class="image-gallery-page">
     <div class="container">
+      <header1 />
+      <div class='position-sticky'>
       <div class="row">
         <div class="col-12 col-md-4">
           <ThumbsPerPageSlider
@@ -12,6 +14,7 @@
         <div class="col-12 col-md-4">
           <Paginator
             v-on:[flipPage]="paginate"
+            v-on:[setPage]="setCurrentPage"
             :currentPage="currentPage"
             :maxPage="maxPage"
             :minPage="minPage"
@@ -23,6 +26,7 @@
             v-on:[searchAuthor]="filterImagesByAuthor"
             v-bind:searchAuthorText="searchAuthorKeyword"
           />
+        </div>
         </div>
 
         <div class="col-12">
@@ -44,6 +48,7 @@
 /** @type controlPanelEvents */
 import controlPanelEvents from "../../components/control_panel/controlPanelEvents.js";
 import AuthorSearchBar from '../../components/control_panel/AuthorSearchBar.vue';
+import Header1 from '../headers/Header1.vue';
 import Modal1 from "../../components/modal/Modal1.vue";
 import Paginator from "../../components/control_panel/Paginator.vue";
 import SingleImgThumb from "../../components/imgs/SingleImgThumb.vue";
@@ -54,7 +59,7 @@ export default {
     return {
       closeModal: controlPanelEvents.closeModal,
       imgListToShow: [],
-      thumbsPerPage: 7,
+      thumbsPerPage: 30,
       openModal: controlPanelEvents.openModal,
       currentPage: 1,
       flipPage: controlPanelEvents.flipPage,
@@ -66,6 +71,7 @@ export default {
       prevPageDisabled: false,
       searchAuthor: controlPanelEvents.searchAuthor,
       searchAuthorKeyword: '',
+      setPage: controlPanelEvents.setPage,
       showModal: false,
       modalImg: {},
       updateThumbsPerPageEvent: controlPanelEvents.updateThumbsPerPage,
@@ -115,11 +121,17 @@ export default {
     },
     filterImagesByAuthor: function(keyword){
         this.searchAuthorKeyword = keyword; 
+    },
+    setCurrentPage: function(val){
+      if(val < 1) val = 100;
+      if(val > 100) val = 1;
+        this.currentPage = val;
     }
   },
   computed: {},
   components: {
     AuthorSearchBar,
+    Header1,
     Modal1,
     Paginator,
     SingleImgThumb,

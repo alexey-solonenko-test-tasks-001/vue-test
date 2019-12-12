@@ -1,31 +1,33 @@
 <template>
-    <div class='row'>
-        <p class='col-xs-12'>Thumbnails per page</p>
-        <div class='col-xs-12'>
+  <div class="row pb-1">
+    <div class="col-12">
+      <div class="neat-border">
+        <div class="row p-15">
+          <p class="col-xs-12">Thumbnails per page 1...100</p>
+          <div class="col-xs-12 col-md-4 col-lg-3">
             <input
-                type='number'
-                id='thumbsPerPageInput'
-                name='thumbsPerPageInput'
-                v-on='listeners'
-                :value='thumbsPerPage'
-                
-            >
-        </div>
-        <div class='col-xs-2'>1</div>
-        <div class='col-xs-8'>
+              type="number"
+              id="thumbsPerPageInput"
+              name="thumbsPerPageInput"
+              v-on="listeners"
+              :value="thumbsPerPage"
+            />
+          </div>
+          <div class="col-xs-12 col-md-8 col-lg-9">
             <input
-                type='range'
-                id='thumbsPerPageSlider'
-                name='thumbsPerPageSlider'
-                min='1'
-                max='100'
-                v-on='listeners'
-                :value='thumbsPerPage'
-            >
+              type="range"
+              id="thumbsPerPageSlider"
+              name="thumbsPerPageSlider"
+              min="1"
+              max="100"
+              v-on="listeners"
+              :value="thumbsPerPage"
+            />
+          </div>
         </div>
-        <div class='col-xs-2'>100 to repl with prop</div>
-
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -34,26 +36,27 @@
  */
 
 /** @type controlPanelEvents */
-import controlPanelEvents from './controlPanelEvents.js';
+import controlPanelEvents from "./controlPanelEvents.js";
 
 export default {
-    props: {
-        thumbsPerPage: {
-            required:false
-        },
-    },
-    computed: {
-        /**
-         * @function
-         * @description This function is taken from official Vue.js tutorial
-         * https://codesandbox.io/s/o29j95wx9
-         */
-        listeners(){
-            return ({
-                ...this.$listeners,
-                input: event => this.$emit(controlPanelEvents.updateThumbsPerPage,event.target.value)
-            });
-        }
+  props: {
+    thumbsPerPage: {
+      required: false
     }
-}
+  },
+  computed: {
+    /**
+     * @function
+     * @description This function is taken from official Vue.js tutorial
+     * https://codesandbox.io/s/o29j95wx9
+     */
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: event =>
+          this.$emit(controlPanelEvents.updateThumbsPerPage, event.target.value)
+      };
+    }
+  }
+};
 </script>

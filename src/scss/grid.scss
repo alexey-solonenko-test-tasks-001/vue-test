@@ -15,6 +15,7 @@
         .col-#{$mediaKey}#{$i} {
             float: left;
             position: relative;
+            min-height: 1px;
             padding-right: 15px;
             padding-left: 15px;
             // width: 100% * $i / map-get($settings,"columns") - $marginInPercent;

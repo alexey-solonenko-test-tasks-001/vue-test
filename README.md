@@ -4,7 +4,6 @@ VIDEO SLOT ASSESSMENT
 https://picsum-asolonenko.herokuapp.com/
 
 
-
 ** IMPLEMENTED
 
 - components and modularity - done (parent-child, code-split). It's the first time ever I work with Vue, hope the result makes sense.

@@ -27,11 +27,12 @@ https://picsum-asolonenko.herokuapp.com/
 - did not manage get Total Count from API response, thus mocked the pagination inside the app. I could not resolve total number of items to restrict thumbs/per page vs max number of pages?
 - To regain extra points for the the above I made a dummy search by Author keyword on the server. It INTENTIONALLY calls API multiple times to collect all matches. Proper way is to implement a call with /username/ param to unsplash API. But that was not in the assignment.
 
-## DID NOT UNDERSTAND
+## DID NOT UNDERSTAND/NOT IMPLEMENTED
 Could not understand assignment description:
 - interface labels (such as Page , Next , Prev etc.) aren't hardcoded (use object labels or similar) 
 -- should I have set up i18n for Vue JS, please?
 
+-  https://picsum.photos/images hinted for hash-history. Did not have time to implement. Would opt for some standard Vue router.
 
 
 

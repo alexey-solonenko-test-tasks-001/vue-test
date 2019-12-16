@@ -1,0 +1,11 @@
+@import '../../forms.scss';
+
+.image-gallery-search-author {
+    &__input {
+        @extend %base-input;
+    }
+
+    &__label {
+        @extend %base-label;
+    }
+}

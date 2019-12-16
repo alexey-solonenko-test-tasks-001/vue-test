@@ -2,7 +2,9 @@ html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -56,6 +58,10 @@ body {
   text-align: right;
 }
 
+.text-left {
+  text-align: left;
+}
+
 .neat-border {
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -63,6 +69,14 @@ body {
 
 .text-truncate {
   text-overflow: ellipsis;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
 }
 
 .container {
@@ -887,61 +901,21 @@ body {
   display: flex !important;
 }
 
-/* Simple modal, source: https://www.w3schools.com/howto/howto_css_modals.asp */
-/* The Modal (background) */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
+.image-gallery-grid-controller__thumbs-per-page-input, .image-gallery-paginator__current-page, .image-gallery-search-author__input {
   width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: black;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto auto auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 75%;
-}
-
-/* The Close Button */
-.close {
-  color: white;
-  background-color: gray;
-  float: right;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-input[type=text], input[type=number], input[type=range], select, textarea {
-  width: 100%;
-  padding: 12px;
+  padding: 0.375em;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
   resize: vertical;
 }
 
-label {
-  padding: 12px 12px 12px 0;
+.image-gallery-search-author__label {
+  padding: 0.375em;
   display: inline-block;
 }
 
-button {
+.image-gallery-paginator__button, .image-gallery-modal__close-button {
   background-color: #47b8d4;
   color: white;
   padding: 12px 20px;
@@ -949,6 +923,12 @@ button {
   border-radius: 4px;
   cursor: pointer;
   float: right;
+}
+
+.image-gallery-paginator__button:hover, .image-gallery-modal__close-button:hover {
+  background-color: whitesmoke;
+  color: black;
+  border: 1px solid teal;
 }
 
 .go-to-top {
@@ -967,12 +947,305 @@ button {
   cursor: pointer;
 }
 
-.img-resize {
+.go-to-top:hover {
+  background-color: blue;
+}
+
+.go-to-top:active {
+  background-color: white;
+}
+
+.image-gallery-grid-controller__thumbs-per-page-input, .image-gallery-paginator__current-page, .image-gallery-search-author__input {
+  width: 100%;
+  padding: 0.375em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.image-gallery-search-author__label {
+  padding: 0.375em;
+  display: inline-block;
+}
+
+.image-gallery-paginator__button, .image-gallery-modal__close-button {
+  background-color: #47b8d4;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+.image-gallery-paginator__button:hover, .image-gallery-modal__close-button:hover {
+  background-color: whitesmoke;
+  color: black;
+  border: 1px solid teal;
+}
+
+.image-gallery-grid-controller__thumbs-per-page-slider {
+  width: 100%;
+}
+
+.image-gallery-grid-controller__thumbs-per-page-input, .image-gallery-paginator__current-page, .image-gallery-search-author__input {
+  width: 100%;
+  padding: 0.375em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.image-gallery-search-author__label {
+  padding: 0.375em;
+  display: inline-block;
+}
+
+.image-gallery-paginator__button, .image-gallery-modal__close-button {
+  background-color: #47b8d4;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+.image-gallery-paginator__button:hover, .image-gallery-modal__close-button:hover {
+  background-color: whitesmoke;
+  color: black;
+  border: 1px solid teal;
+}
+
+.image-gallery-paginator__current-page {
+  margin-right: 0px;
+  padding-right: 0px;
+  text-align: right;
+  border: 0px !important;
+  text-align: right;
+  -moz-appearance: textfield !important;
+  font-size: 1rem;
+}
+
+.image-gallery-paginator__current-page::-webkit-outer-spin-button, .image-gallery-paginator__current-page::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.image-gallery-paginator__current-page-div {
+  margin-right: 0px;
+  padding-right: 0px;
+}
+
+.image-gallery-paginator__total-pages {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.image-gallery-grid-controller__thumbs-per-page-input, .image-gallery-paginator__current-page, .image-gallery-search-author__input {
+  width: 100%;
+  padding: 0.375em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.image-gallery-search-author__label {
+  padding: 0.375em;
+  display: inline-block;
+}
+
+.image-gallery-paginator__button, .image-gallery-modal__close-button {
+  background-color: #47b8d4;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+.image-gallery-paginator__button:hover, .image-gallery-modal__close-button:hover {
+  background-color: whitesmoke;
+  color: black;
+  border: 1px solid teal;
+}
+
+.image-gallery-thumb {
+  width: 100%;
+  height: auto;
+}
+
+.image-gallery-thumb__img {
+  resize: both;
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+  width: 100%;
+}
+
+.image-gallery-thumb__img:hover {
+  filter: sepia(75%);
+}
+
+.image-gallery-thumb__id-border {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-radius: 9999px;
+  background-color: lightgray;
+}
+
+.image-gallery-thumb__id-border:hover {
+  color: gray;
+}
+
+.image-gallery-thumb__info-bar {
+  padding-top: 6px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.image-gallery-thumb__author {
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.image-gallery-thumb__author:hover {
+  color: gray;
+}
+
+.image-gallery-thumb__id {
+  color: black;
+}
+
+.image-gallery-thumb__id:hover {
+  color: white;
+}
+
+.image-gallery-thumb__loading-spinner {
+  background-color: white;
+  width: 100%;
+  height: auto;
+  /* todo to add rotating spinner */
+}
+
+.image-gallery-thumb__loading-background {
+  background-color: white;
+  width: 100%;
+  height: 220px;
+  /* todo to add rotating spinner */
+}
+
+.image-gallery-thumb__loading-spinner {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.image-gallery-grid-controller__thumbs-per-page-input, .image-gallery-paginator__current-page, .image-gallery-search-author__input {
+  width: 100%;
+  padding: 0.375em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.image-gallery-search-author__label {
+  padding: 0.375em;
+  display: inline-block;
+}
+
+.image-gallery-paginator__button, .image-gallery-modal__close-button {
+  background-color: #47b8d4;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+.image-gallery-paginator__button:hover, .image-gallery-modal__close-button:hover {
+  background-color: whitesmoke;
+  color: black;
+  border: 1px solid teal;
+}
+
+.image-gallery-modal__modal-base {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.image-gallery-modal__modal-content {
+  background-color: #fefefe;
+  margin: 5% auto auto auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 75%;
+}
+
+.image-gallery-modal__img {
   resize: both;
   max-width: 100%;
   height: auto;
 }
 
-.sepia:hover {
-  filter: sepia(75%);
+.image-gallery-modal__loading-background {
+  background-color: white;
+  width: 100%;
+  height: 35%;
+  /* todo to add rotating spinner */
+}
+
+.image-gallery-modal__loading-spinner {
+  border: 16px solid whitesmoke;
+  border-top: 16px solid teal;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

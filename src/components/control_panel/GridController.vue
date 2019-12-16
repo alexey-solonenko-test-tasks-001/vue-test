@@ -1,12 +1,13 @@
 <template>
-  <div class="row pb-1">
+  <div class="row pb-1 h-100">
     <div class="col-12">
-      <div class="neat-border">
+      <div class="neat-border h-100">
         <div class="row p-15">
           <p class="col-xs-12">Thumbnails per page 1...100</p>
           <div class="col-xs-12 col-md-4 col-lg-3">
             <input
               type="number"
+              class='image-gallery-grid-controller__thumbs-per-page-input'
               id="thumbsPerPageInput"
               name="thumbsPerPageInput"
               v-on="listeners"
@@ -16,6 +17,7 @@
           <div class="col-xs-12 col-md-8 col-lg-9">
             <input
               type="range"
+              class='image-gallery-grid-controller__thumbs-per-page-slider'
               id="thumbsPerPageSlider"
               name="thumbsPerPageSlider"
               min="1"

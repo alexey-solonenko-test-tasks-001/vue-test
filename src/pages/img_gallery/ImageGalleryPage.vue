@@ -1,38 +1,53 @@
 <template>
   <div class="image-gallery-page">
     <div class="container">
-      <header1 />
-      <div class='position-sticky'>
-      <div class="row">
-        <div class="col-12 col-md-4">
-          <ThumbsPerPageSlider
-            v-on:[updateThumbsPerPageEvent]="thumbsPerPage = $event"
-            :thumbsPerPage="thumbsPerPage"
-          />
-        </div>
-
-        <div class="col-12 col-md-4">
-          <Paginator
-            v-on:[flipPage]="paginate"
-            v-on:[setPage]="setCurrentPage"
-            :currentPage="currentPage"
-            :maxPage="maxPage"
-            :minPage="minPage"
-          />
-        </div>
-
-        <div class='col-12 col-md-4'>
-          <AuthorSearchBar 
-            v-on:[searchAuthor]="filterImagesByAuthor"
-            v-bind:searchAuthorText="searchAuthorKeyword"
-          />
-        </div>
-        </div>
-
-        <div class="col-12">
-          <div class="row">
-            <single-img-thumb v-for="img in imgListToShow" v-bind:key="img.id" v-bind:img="img" v-bind:searchKeyword="searchAuthorKeyword" v-on:[openModal]="openSingleImgModal" v-on:[closeModal]="closeSingleImgModal" />
+      <Header1 />
+      <div class="position-sticky">
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <GridController
+              v-on:[updateThumbsPerPage]="thumbsPerPage = $event"
+              :thumbsPerPage="thumbsPerPage"
+            />
           </div>
+
+          <div class="col-12 col-md-4">
+            <Paginator
+              v-on:[flipPage]="paginate"
+              v-on:[setPage]="setCurrentPage"
+              :currentPage="currentPage"
+              :maxPage="maxPage"
+              :minPage="minPage"
+            />
+          </div>
+
+          <div class="col-12 col-md-4">
+            <AuthorSearchBar
+              v-bind:searchAuthorText="searchAuthorKeyword"
+              v-bind:loading="loadingList"
+              v-on="authorListeners"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row" v-bind:class="loadingList ? 'd-flex': 'd-none'">
+        <div class="col-12">Searching...</div>
+      </div>
+      <div class="row" v-bind:class="noResults ? 'd-flex' : 'd-none'">
+        <div class="col-12">No results found</div>
+      </div>
+
+      <div class="col-12">
+        <div class="row">
+          <single-img-thumb
+            v-for="img in imgList"
+            v-bind:key="img.id"
+            v-bind:img="img"
+            v-bind:searchKeyword="searchAuthorOnServer ? '' :searchAuthorKeyword"
+            v-on:[openModal]="openSingleImgModal"
+            v-on:[closeModal]="closeSingleImgModal"
+          />
         </div>
       </div>
     </div>
@@ -44,98 +59,145 @@
 /**
  * @typedef import('../../components/control_panel/controlPanelEvents.js').controlPanelEvents
  */
+/**
+ * @typedef import('./getImgList.js').getImgListProps
+ */
 
-/** @type controlPanelEvents */
+import AuthorSearchBar from "../../components/control_panel/AuthorSearchBar.vue";
+/** @type {controlPanelEvents} */
 import controlPanelEvents from "../../components/control_panel/controlPanelEvents.js";
-import AuthorSearchBar from '../../components/control_panel/AuthorSearchBar.vue';
-import Header1 from '../headers/Header1.vue';
+import GridController from "../../components/control_panel/GridController.vue";
+import debounce from "lodash.debounce";
+import getImgList from "./getImgList.js";
+import Header1 from "../headers/Header1.vue";
 import Modal1 from "../../components/modal/Modal1.vue";
 import Paginator from "../../components/control_panel/Paginator.vue";
 import SingleImgThumb from "../../components/imgs/SingleImgThumb.vue";
-import ThumbsPerPageSlider from "../../components/control_panel/ThumbsPerPageSlider.vue";
 
 export default {
   data: function() {
     return {
-      closeModal: controlPanelEvents.closeModal,
-      imgListToShow: [],
-      thumbsPerPage: 30,
-      openModal: controlPanelEvents.openModal,
+      /* Events literals, imported */
+      ...controlPanelEvents,
+
+      /* Props */
       currentPage: 1,
-      flipPage: controlPanelEvents.flipPage,
+      imgList: [],
       maxPage: 100,
       minPage: 1,
-      nextPageEv: controlPanelEvents.nextPage,
-      nextPageDisabled: false,
-      prevPageEv: controlPanelEvents.previousPage,
-      prevPageDisabled: false,
-      searchAuthor: controlPanelEvents.searchAuthor,
-      searchAuthorKeyword: '',
-      setPage: controlPanelEvents.setPage,
-      showModal: false,
       modalImg: {},
-      updateThumbsPerPageEvent: controlPanelEvents.updateThumbsPerPage,
+      openModal: controlPanelEvents.openModal,
+      searchAuthorKeyword: "",
+      thumbsPerPage: 30,
+
+      /* directives & states */
+      loadingList: false,
+      noResults: false,
+      searchAuthorOnServer: false,
+      showModal: false,
+
+      /* Other */
+      totalImgs: 1000
     };
   },
   watch: {
     thumbsPerPage: function() {
-      this.loadImages();
+      this.recalcMax();
+      this.currentPage = 1;
+      this.debouncedLoadImages();
     },
     currentPage: function() {
-      this.loadImages();
+      this.recalcMax();
+      this.debouncedLoadImages();
     }
   },
   created: function() {
-    this.imgListToShow = this.loadImages();
+    this.recalcMax();
+    this.debouncedLoadImages = debounce(this.loadImages, 500, {
+      trailing: true
+    });
+    this.loadImages();
   },
   methods: {
-    loadImages: function() {
-      let vm = this;
-      this.searchAuthorKeyword = '';
-      fetch(
-        `https://picsum.photos/v2/list?page=${this.currentPage}&limit=${this.thumbsPerPage}`
-      )
-        .then(res => res.json())
+    loadImages: function(term = "") {
+      this.noResults = false;
+      if (this.loadingList) {
+        return;
+      }
+      this.loadingList = true;
+      this.imgList = [];
+      let props = {
+        limit: this.thumbsPerPage,
+        origin: `https://picsum.photos/v2/list`,
+        page: this.currentPage,
+        search: this.searchAuthorOnServer,
+        searchField: "author",
+        term: term,
+        total: this.totalImgs
+      };
+      getImgList(props)
         .then(res => {
-          vm.imgListToShow = res;
+          this.imgList = res.list;
+        })
+        .finally(() => {
+          this.loadingList = false;
+          if (this.imgList.length === 0) this.noResults = true;
+          if (this.searchAuthorKeyword.length > 0) {
+            this.$nextTick(() =>
+              document
+                .getElementsByClassName("image-gallery-search-author__input")[0]
+                .focus()
+            );
+          }
         });
     },
-    closeSingleImgModal : function(){
+    closeSingleImgModal: function() {
       this.showModal = false;
     },
-    openSingleImgModal: function(img){
-        this.showModal = true;
-        this.modalImg = img;
+    openSingleImgModal: function(img) {
+      this.showModal = true;
+      this.modalImg = img;
     },
     paginate: function(dir) {
-      if (dir < 0) {
-        this.currentPage--;
-        if (this.currentPage < 1) {
-          this.currentPage = 1;
-          this.prevPageDisabled = true;
-        }
-      } else if (dir > 0) {
-        this.currentPage++;
+      this.setCurrentPage(dir > 0 ? ++this.currentPage : --this.currentPage);
+    },
+    filterImagesByAuthor: function(keyword) {
+      this.searchAuthorKeyword = keyword;
+      if (this.searchAuthorOnServer) {
+        this.debouncedLoadImages(keyword);
       }
-      //this.loadImages();
     },
-    filterImagesByAuthor: function(keyword){
-        this.searchAuthorKeyword = keyword; 
+    setCurrentPage: function(val) {
+      if (val < 1) val = this.maxPage;
+      if (val > this.maxPage) val = 1;
+      this.currentPage = val;
     },
-    setCurrentPage: function(val){
-      if(val < 1) val = 100;
-      if(val > 100) val = 1;
-        this.currentPage = val;
+    recalcMax: function() {
+      this.maxPage = Math.floor(this.totalImgs / this.thumbsPerPage);
+    },
+    searchAuthorOnServerM: function(ev) {
+      this.searchAuthorOnServer = ev.checked;
+    },
+    findEvent: function(ev) {
+      return ev;
     }
   },
-  computed: {},
+  computed: {
+    authorListeners: function() {
+      return {
+        ...this.$listeners,
+        [this.searchServer]: this.searchAuthorOnServerM,
+        [this.searchAuthor]: this.filterImagesByAuthor
+      };
+    }
+  },
   components: {
     AuthorSearchBar,
+    GridController,
     Header1,
     Modal1,
     Paginator,
-    SingleImgThumb,
-    ThumbsPerPageSlider
+    SingleImgThumb
   }
 };
 </script>

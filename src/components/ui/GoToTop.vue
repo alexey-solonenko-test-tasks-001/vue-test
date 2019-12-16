@@ -5,7 +5,7 @@
 <script>
 export default {
     methods :{
-        goToTop: function(){
+        goToTop: function() {
             window.scroll(0,0);
         }
     },

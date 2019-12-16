@@ -4,20 +4,10 @@
 @import './global_styles.scss';
 @import './grid.scss';
 @import './display.scss';
-@import './modal.scss';
 @import './forms.scss';
 @import './go_to_top.scss';
-
-
-
-
-
-  .img-resize {
-      resize: both;
-      max-width: 100%;
-      height: auto;
-  }
-
-  .sepia:hover {
-      filter:sepia(75%)
-  }
+@import './components/control_panel/grid_controller.scss';
+@import './components/control_panel/paginator.scss';
+@import './components/control_panel/search_author.scss';
+@import './imgs/single_img_thumb/single_img_thumb.scss';
+@import './components/modal/modal.scss';

@@ -1,0 +1,35 @@
+@import '../../forms.scss';
+
+.image-gallery-paginator {
+
+    &__button {
+        @extend %base-button;
+    }
+
+    &__current-page {
+        @extend %base-input;
+        margin-right: 0px;
+        padding-right: 0px;
+        text-align: right;
+        border: 0px !important;
+        text-align: right;
+        -moz-appearance: textfield !important;
+        font-size: 1rem;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+
+    &__current-page-div {
+        margin-right: 0px;
+        padding-right: 0px;
+    }
+
+    &__total-pages {
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+}

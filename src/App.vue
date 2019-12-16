@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <GoToTop />
-    <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
     <ImageGalleryPage />
   </div>
 </template>

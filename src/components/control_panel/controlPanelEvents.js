@@ -6,6 +6,7 @@
  * @property {string} openModal
  * @property {string} previousPage
  * @property {string} searchAuthor
+ * @property {boolean} searchServer
  * @property {string} setPage
  * @property {string} updateThumbPerPage
  */
@@ -17,6 +18,7 @@ export default {
     openModal: 'open-modal',
     previousPage: 'previous-page',
     searchAuthor: 'search-author',
+    searchServer: 'search-server',
     setPage: 'set-page',
     updateThumbsPerPage: 'update-thumbs-per-page'
 }

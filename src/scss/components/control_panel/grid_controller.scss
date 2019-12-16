@@ -1,0 +1,11 @@
+@import '../../forms.scss';
+
+.image-gallery-grid-controller {
+    &__thumbs-per-page-input {
+        @extend %base-input;
+    }
+
+    &__thumbs-per-page-slider {
+        width: 100%;
+    }
+}

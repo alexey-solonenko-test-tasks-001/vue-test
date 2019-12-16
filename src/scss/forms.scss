@@ -1,24 +1,29 @@
 
-input[type=text], input[type=number], input[type=range], select, textarea{
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    resize: vertical;
-  }
-  
- label {
-    padding: 12px 12px 12px 0;
-    display: inline-block;
-  }
-  
-  button {
-    background-color: rgb(71, 184, 212);
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-  }
+%base-input {
+  width: 100%;
+  padding: 0.375em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+%base-label {
+  padding: 0.375em;
+  display: inline-block;
+}
+
+%base-button { 
+  background-color: rgb(71, 184, 212);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  &:hover{
+    background-color: whitesmoke;
+    color:black;
+    border:1px solid teal;
+ }
+}

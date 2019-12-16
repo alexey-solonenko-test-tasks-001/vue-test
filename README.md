@@ -9,7 +9,7 @@ https://picsum-asolonenko.herokuapp.com/
 - components and modularity - done (parent-child, code-split). It's the first time ever I work with Vue, hope the result makes sense.
 - load image thumbnails - done.
 - modal + iframe. Could not launch iframe. To regain points: shows image, 'Save As' dialogue button, link to 'unsplash'.
-- pagination, thumbnails per page - done.
+- pagination, thumbnails per page, page lenght recalc max page, etc. - done.
 - responsiveness - done.
 - author's filter - done both, on the page, and on the server, see checkbox on the page.
 - debouncing - done, + disabling input for long searchs, + searging/no results.
